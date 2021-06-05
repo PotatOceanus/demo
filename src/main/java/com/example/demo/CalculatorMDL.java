@@ -22,7 +22,7 @@ public class CalculatorMDL {
 
     @ResponseBody
     @GetMapping("CalculatorMDL")
-    public List CalculatorMdl (@RequestParam(value = "Max") int max,
+    public List CalculatorMDL (@RequestParam(value = "Max") int max,
                         @RequestParam(value = "Divisor") int divisor,
                         @RequestParam(value = "Limit") int limit) {
         return getNumbers(max, divisor, limit);
