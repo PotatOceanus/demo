@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
+@Table(name="app_user")
 public class User {
 
     public static String getStringDate() {
