@@ -26,8 +26,9 @@ public class NewController {
 //    }
 
     @RequestMapping(value ="/user-management/add", method = RequestMethod.POST)
-    public User addUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public String addUser(@RequestBody User user) {
+        userRepository.save(user);
+        return "201 created";
     }
 
 }
