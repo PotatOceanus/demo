@@ -10,7 +10,7 @@ import com.example.demo.service.AddUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("addUserServiceImpl")
+@Service
 public class AddUserServiceImpl implements AddUserService {
 
 
@@ -20,9 +20,6 @@ public class AddUserServiceImpl implements AddUserService {
     @Autowired
     private InfoGuess infoGuess;
 
-    public AddUserServiceImpl () {
-    }
-
     @Override
     public User getUserInfoFull(UserInfoPush userInfoPush) {
 
@@ -30,18 +27,18 @@ public class AddUserServiceImpl implements AddUserService {
         UserInfoGuess userInfoGuess = infoGuess.getUserInfoGuess(userInfoPush);
 
         User user = new User(userInfoGen.getUsername(),
-                userInfoPush.getPassword(),
-                userInfoPush.getFirstName(),
-                userInfoPush.getLastName(),
-                userInfoPush.getEmail(),
-                userInfoPush.getContactNumber(),
-                userInfoGuess.getAge(),
-                userInfoGuess.getGender(),
-                userInfoGuess.getNationality(),
-                userInfoGen.getTags(),
-                userInfoGen.getStatus(),
-                userInfoGen.getCreated(),
-                userInfoGen.getUpdated());
+                            userInfoPush.getPassword(),
+                            userInfoPush.getFirstName(),
+                            userInfoPush.getLastName(),
+                            userInfoPush.getEmail(),
+                            userInfoPush.getContactNumber(),
+                            userInfoGuess.getAge(),
+                            userInfoGuess.getGender(),
+                            userInfoGuess.getNationality(),
+                            userInfoGen.getTags(),
+                            userInfoGen.getStatus(),
+                            userInfoGen.getCreated(),
+                            userInfoGen.getUpdated());
 
         return user;
     }
