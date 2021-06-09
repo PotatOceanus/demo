@@ -15,5 +15,5 @@ public class UserInfoPush {
     private String lastName;
     private String email;
     private String contactNumber;
-    private List<String> tag;
+    private List<String> tags;
 }
