@@ -28,7 +28,7 @@ public class InfoGen {
         UserInfoGen userInfoGen = new UserInfoGen();
 
 //        set username
-        String username = userInfoPush.getFirstName() + userInfoPush.getLastName();
+        String username = userInfoPush.getEmail();
         userInfoGen.setUsername(username);
 
 //        set tags
