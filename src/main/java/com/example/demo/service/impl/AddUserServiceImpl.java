@@ -20,11 +20,17 @@ public class AddUserServiceImpl implements AddUserService {
     @Autowired
     private InfoGuess infoGuess;
 
+    @Autowired
+    private UserInfoGuess userInfoGuess;
+
+    @Autowired
+    private UserInfoGen userInfoGen;
+
     @Override
     public User getUserInfoFull(UserInfoPush userInfoPush) {
 
-        UserInfoGen userInfoGen = infoGen.getUserInfoGen(userInfoPush);
-        UserInfoGuess userInfoGuess = infoGuess.getUserInfoGuess(userInfoPush);
+        userInfoGen = infoGen.getUserInfoGen(userInfoPush);
+        userInfoGuess = infoGuess.getUserInfoGuess(userInfoPush);
 
         User user = new User(userInfoGen.getUsername(),
                             userInfoPush.getPassword(),
