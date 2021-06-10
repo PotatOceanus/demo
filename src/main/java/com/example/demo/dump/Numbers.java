@@ -1,5 +1,10 @@
 package com.example.demo.dump;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Numbers {
     private int max;
     private int divisor;

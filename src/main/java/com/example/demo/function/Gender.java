@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Gender {
-//    private String name;
+    private String name;
     private String gender;
 }

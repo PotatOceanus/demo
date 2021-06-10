@@ -30,7 +30,7 @@ public class AddUserServiceImpl implements AddUserService {
     public User getUserInfoFull(UserInfoPush userInfoPush) {
 
         userInfoGen = infoGen.getUserInfoGen(userInfoPush);
-        userInfoGuess = infoGuess.getUserInfoGuess(userInfoPush);
+        userInfoGuess = infoGuess.getUserInfoGuess(userInfoPush.getFirstName());
 
         User user = new User(userInfoGen.getUsername(),
                             userInfoPush.getPassword(),

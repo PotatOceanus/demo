@@ -15,23 +15,40 @@ public class InfoGuess {
     @Autowired
     RestTemplate restTemplate;
 
-    public UserInfoGuess getUserInfoGuess (UserInfoPush userInfoPush) {
+    UserInfoGuess userInfoGuess = new UserInfoGuess();
+
+//    public int getAge (String firstName) {
+//        Age age = restTemplate.getForObject("https://api.agify.io/?name={nameE}", Age.class, firstName);
+//        return age.getAge();
+//    }
+//
+//    public String getGender (String firstName) {
+//        Gender gender = restTemplate.getForObject("https://api.genderize.io?name={nameE}", Gender.class, firstName);
+//        return gender.getGender();
+//    }
+//
+//    public String getNationality (String firstName) {
+//        Nationality nationality = restTemplate.getForObject("https://api.nationalize.io?name={nameE}", Nationality.class, firstName);
+//        return (String) nationality.getCountry().get(0).get("country_id");
+//    }
+
+    public UserInfoGuess getUserInfoGuess (String firstName) {
+
 
         UserInfoGuess userInfoGuess = new UserInfoGuess();
-//        RestTemplate restTemplate = new RestTemplate();
 
 //        guess age
-        Age age = restTemplate.getForObject("https://api.agify.io/?name={nameE}", Age.class, userInfoPush.getFirstName());
+        Age age = restTemplate.getForObject("https://api.agify.io/?name={?}", Age.class,firstName);
         userInfoGuess.setAge(age.getAge());
 
 //        guess gender
-        Gender gender = restTemplate.getForObject("https://api.genderize.io?name={nameE}", Gender.class, userInfoPush.getFirstName());
+        Gender gender = restTemplate.getForObject("https://api.genderize.io?name={name}", Gender.class, firstName);
         userInfoGuess.setGender(gender.getGender());
 
 //        guess nationality
-        Nationality nationality = restTemplate.getForObject("https://api.nationalize.io?name={nameE}", Nationality.class, userInfoPush.getFirstName());
+        Nationality nationality = restTemplate.getForObject("https://api.nationalize.io?name={name}", Nationality.class, firstName);
         if (!nationality.getCountry().isEmpty()) {
-            userInfoGuess.setNationality((String)restTemplate.getForObject("https://api.nationalize.io?name={nameE}", Nationality.class, userInfoPush.getFirstName()).getCountry().get(0).get("country_id"));
+            userInfoGuess.setNationality((String)restTemplate.getForObject("https://api.nationalize.io?name={name}", Nationality.class, firstName).getCountry().get(0).get("country_id"));
         } else {
             userInfoGuess.setNationality(null);
         }
