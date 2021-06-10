@@ -22,8 +22,8 @@ public class UpdateUserServiceImpl implements UpdateUserService {
     @Autowired
     InfoGuess infoGuess;
 
-    @Autowired
-    UserInfoGuess userInfoGuess;
+//    @Autowired
+//    UserInfoGuess userInfoGuess;
 
 //    @Autowired
 //    InfoGen infoGen;
@@ -34,11 +34,12 @@ public class UpdateUserServiceImpl implements UpdateUserService {
         User user_to_update =
                 userRepository.findById(userInfoUpdate.getUsername())
                         .orElseThrow(() -> new UserNotFoundException("User not found by this username : " + "{" + userInfoUpdate.getUsername() + "}"));
+        User user_guess = new User();
         User user = new User();
 
 //        first name change, guess information update
         Boolean firstName_new = (user_to_update.getFirstName() != userInfoUpdate.getFirstName() && userInfoUpdate.getFirstName() != null);
-        if (firstName_new) { userInfoGuess = infoGuess.getUserInfoGuess(userInfoUpdate.getFirstName()); }
+        if (firstName_new) { user_guess = infoGuess.getUserInfoGuess(userInfoUpdate.getFirstName()); }
 
         user.setUsername(user_to_update.getUsername());
         user.setPassword(userInfoUpdate.getPassword() != null ? userInfoUpdate.getPassword() : user_to_update.getPassword());
@@ -48,12 +49,11 @@ public class UpdateUserServiceImpl implements UpdateUserService {
         user.setContactNumber(userInfoUpdate.getContactNumber() != null ? userInfoUpdate.getContactNumber() : user_to_update.getContactNumber());
         user.setLastName(userInfoUpdate.getLastName() != null ? userInfoUpdate.getLastName() : user_to_update.getLastName());
         user.setAge(userInfoUpdate.getAge() != 0 ? userInfoUpdate.getAge() : (firstName_new)
-                                                    ? userInfoGuess.getAge() : user_to_update.getAge());
+                                                    ? user_guess.getAge() : user_to_update.getAge());
         user.setGender(userInfoUpdate.getGender() != null ? userInfoUpdate.getGender() : (firstName_new)
-                                                            ? userInfoGuess.getGender() : user_to_update.getGender());
+                                                            ? user_guess.getGender() : user_to_update.getGender());
         user.setNationality(userInfoUpdate.getNationality() != null ? userInfoUpdate.getNationality() : (firstName_new)
-                                                                    ? userInfoGuess.getNationality() : user_to_update.getNationality());
-        System.out.println(user_to_update.getTags());
+                                                                    ? user_guess.getNationality() : user_to_update.getNationality());
         user.setTags(userInfoUpdate.getTags() != null ? userInfoUpdate.getTags() : user_to_update.getTags());
         user.setStatus("active");
         user.setCreated(user_to_update.getCreated());

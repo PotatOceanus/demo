@@ -1,8 +1,6 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.User;
-import com.example.demo.entity.UserInfoGen;
-import com.example.demo.entity.UserInfoGuess;
 import com.example.demo.entity.UserInfoPush;
 import com.example.demo.function.InfoGen;
 import com.example.demo.function.InfoGuess;
@@ -20,31 +18,31 @@ public class AddUserServiceImpl implements AddUserService {
     @Autowired
     private InfoGuess infoGuess;
 
-    @Autowired
-    private UserInfoGuess userInfoGuess;
+//    @Autowired
+//    private UserInfoGuess userInfoGuess;
 
-    @Autowired
-    private UserInfoGen userInfoGen;
+//    @Autowired
+//    private UserInfoGen userInfoGen;
 
     @Override
     public User getUserInfoFull(UserInfoPush userInfoPush) {
 
-        userInfoGen = infoGen.getUserInfoGen(userInfoPush);
-        userInfoGuess = infoGuess.getUserInfoGuess(userInfoPush.getFirstName());
+        User user_gen = infoGen.getUserInfoGen(userInfoPush);
+        User user_guess = infoGuess.getUserInfoGuess(userInfoPush.getFirstName());
 
-        User user = new User(userInfoGen.getUsername(),
+        User user = new User(user_gen.getUsername(),
                             userInfoPush.getPassword(),
                             userInfoPush.getFirstName(),
                             userInfoPush.getLastName(),
                             userInfoPush.getEmail(),
                             userInfoPush.getContactNumber(),
-                            userInfoGuess.getAge(),
-                            userInfoGuess.getGender(),
-                            userInfoGuess.getNationality(),
-                            userInfoGen.getTags(),
-                            userInfoGen.getStatus(),
-                            userInfoGen.getCreated(),
-                            userInfoGen.getUpdated());
+                            user_guess.getAge(),
+                            user_guess.getGender(),
+                            user_guess.getNationality(),
+                            user_gen.getTags(),
+                            user_gen.getStatus(),
+                            user_gen.getCreated(),
+                            user_gen.getUpdated());
 
         return user;
     }

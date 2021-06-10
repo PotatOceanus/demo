@@ -1,7 +1,6 @@
 package com.example.demo.function;
 
-import com.example.demo.entity.UserInfoGen;
-import com.example.demo.entity.UserInfoGuess;
+import com.example.demo.entity.User;
 import com.example.demo.entity.UserInfoPush;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +17,7 @@ public class InfoGuess {
     @Autowired
     GuessResEntity guessResEntity;
 
-    UserInfoGuess userInfoGuess = new UserInfoGuess();
+//    UserInfoGuess userInfoGuess = new UserInfoGuess();
 
 //    public int getAge (String firstName) {
 //        Age age = restTemplate.getForObject("https://api.agify.io/?name={nameE}", Age.class, firstName);
@@ -35,27 +34,27 @@ public class InfoGuess {
 //        return (String) nationality.getCountry().get(0).get("country_id");
 //    }
 
-    public UserInfoGuess getUserInfoGuess (String firstName) {
+    public User getUserInfoGuess (String firstName) {
 
 
-        UserInfoGuess userInfoGuess = new UserInfoGuess();
+        User user = new User();
 
 //        guess age
         guessResEntity = restTemplate.getForObject("https://api.agify.io/?name={?}", GuessResEntity.class,firstName);
-        userInfoGuess.setAge(guessResEntity.getAge());
+        user.setAge(guessResEntity.getAge());
 
 //        guess gender
         guessResEntity = restTemplate.getForObject("https://api.genderize.io?name={name}", GuessResEntity.class, firstName);
-        userInfoGuess.setGender(guessResEntity.getGender());
+        user.setGender(guessResEntity.getGender());
 
 //        guess nationality
         guessResEntity = restTemplate.getForObject("https://api.nationalize.io?name={name}", GuessResEntity.class, firstName);
         if (!guessResEntity.getCountry().isEmpty()) {
-            userInfoGuess.setNationality((String)restTemplate.getForObject("https://api.nationalize.io?name={name}", GuessResEntity.class, firstName).getCountry().get(0).get("country_id"));
+            user.setNationality((String)restTemplate.getForObject("https://api.nationalize.io?name={name}", GuessResEntity.class, firstName).getCountry().get(0).get("country_id"));
         } else {
-            userInfoGuess.setNationality(null);
+            user.setNationality(null);
         }
 
-        return userInfoGuess;
+        return user;
     }
 }

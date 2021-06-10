@@ -1,6 +1,6 @@
 package com.example.demo.function;
 
-import com.example.demo.entity.UserInfoGen;
+import com.example.demo.entity.User;
 import com.example.demo.entity.UserInfoPush;
 //import com.example.demo.service.impl.AddUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,26 +24,26 @@ public class InfoGen {
         return timestamp;
     }
 
-    public UserInfoGen getUserInfoGen (UserInfoPush userInfoPush) {
+    public User getUserInfoGen (UserInfoPush userInfoPush) {
 
-        UserInfoGen userInfoGen = new UserInfoGen();
+        User user = new User();
 
 //        set username
         String username = userInfoPush.getEmail();
-        userInfoGen.setUsername(username);
+        user.setUsername(username);
 
 //        set tags
         String tags = userInfoPush.getTags().stream().collect(Collectors.joining(":"));
-        userInfoGen.setTags(tags);
+        user.setTags(tags);
 
 //        set status
-        userInfoGen.setStatus("active");
+        user.setStatus("active");
 
 //        seg created time and updated time
-        userInfoGen.setCreated(getStringDate());
-        userInfoGen.setUpdated(getStringDate());
+        user.setCreated(getStringDate());
+        user.setUpdated(getStringDate());
 
-        return userInfoGen;
+        return user;
     }
 
 }
