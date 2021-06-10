@@ -75,16 +75,16 @@ public class UserController {
 
     @PostMapping("/update")
     @ResponseBody
-    public User updateUser(@RequestBody UserInfoUpdate userInfoUpdate)
+    public Map<String, Boolean> updateUser(@RequestBody UserInfoUpdate userInfoUpdate)
             throws UserNotFoundException {
         User user_to_update =
                 userRepository
                         .findById(userInfoUpdate.getUsername())
                         .orElseThrow(() -> new UserNotFoundException("User not found by this username : " + "{" + userInfoUpdate.getUsername() + "}"));
         User user = updateUserServiceImpl.makeUserInfoFull(userInfoUpdate);
-//        Map<String, Boolean> response = new HashMap<>();
-//        response.put("{" + user_to_update.getUsername() + "}" + " updated.", Boolean.TRUE);
-//        userRepository.save(user);
-        return user;
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("{" + user_to_update.getUsername() + "}" + " updated.", Boolean.TRUE);
+        userRepository.save(user);
+        return response;
     }
 }
